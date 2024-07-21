@@ -1,12 +1,18 @@
 // ==UserScript==
 // @name         Twitch Rerun Transparency
 // @namespace    Violentmonkey Scripts
-// @version      0.0.1
+//
+// @version      0.1.1
+//
 // @description  Make Reruns from twitch live cards list transparent (works only on twitch.tv/directory/following and twitch.tv/directory/following/live)
-// @author       DampyrDamp
+// @homepage     https://github.com/saccma/twitch-reruns-hide-userscript
+// @author       Dampyr
+//
 // @include      *://www.twitch.tv/*
+//
 // @grant        GM_getResourceText
 // @resource     waitForKeyElements https://cdn.jsdelivr.net/gh/CoeJoder/waitForKeyElements.js@v1.2/waitForKeyElements.js
+//
 // @comment      Based upon the work of Markus 'Ragowit' Persson, "Twitch Rerun Hider - https://greasyfork.org/it/scripts/40477-twitch-rerun-hider/code".
 // ==/UserScript==
 
