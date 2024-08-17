@@ -2,7 +2,7 @@
 // @name         Twitch Rerun Transparency
 // @namespace    Violentmonkey Scripts
 //
-// @version      0.1.1
+// @version      0.2.0
 //
 // @description  Make Reruns from twitch live cards list transparent (works only on twitch.tv/directory/following and twitch.tv/directory/following/live)
 // @homepage     https://github.com/saccma/twitch-reruns-hide-userscript
@@ -18,26 +18,24 @@
 
 eval(GM_getResourceText("waitForKeyElements"));
 
-waitForKeyElements('[data-a-target="Rerun"]', hideRerun);
-waitForKeyElements(".live-channel-card", hideRerunLive);
-
-function hideRerun(jNode) {
-  // Good streams, they tag it as a rerun
-  jNode.closest(".live-channel-card").style.opacity = 0.15;
-  jNode.closest(".live-channel-card").style.background = "dimgray";
-}
+waitForKeyElements("article", hideRerunLive, false);
 
 function hideRerunLive(jNode) {
+var title = jNode.querySelector("h3")?.textContent?.toLowerCase();
+  if (!title) {
+    return;
+  }
+  // Good streams, they tag it as a rerun
+  var rerunTagEl = jNode.querySelector('[data-a-target="Rerun"]');
+  if (rerunTagEl) {
+    hideCard(jNode);
+  } else {
   // Mediocre streams, they don't tag it right but at least type it in the title...
-  var title = jNode.querySelector("h3").textContent.toLowerCase();
-
   var badWords = [
     "re-run",
     "rebroadcast",
     "recap",
     "rerun",
-    " rr",
-    "rr ",
     "!rr",
     "rewatch",
     "𝓡𝓡",
@@ -46,8 +44,12 @@ function hideRerunLive(jNode) {
   ];
 
   if (badWords.some(x => title.includes(x))) {
-    jNode.style.opacity = 0.15;
-    jNode.style.background = "dimgray";
+      hideCard(jNode);
+    }
   }
 }
 
+function hideCard(node) {
+    node.style.opacity = 0.15;
+    node.style.background = "dimgray";
+}
