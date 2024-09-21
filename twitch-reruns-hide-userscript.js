@@ -2,9 +2,9 @@
 // @name         Twitch Rerun Transparency
 // @namespace    Violentmonkey Scripts
 //
-// @version      0.2.0
+// @version      0.3.0
 //
-// @description  Make Reruns from twitch live cards list transparent (works only on twitch.tv/directory/following and twitch.tv/directory/following/live)
+// @description  Make Reruns from twitch cards lists directories transparent (should work for all directories e.g.: /following, /following/live and all categories)
 // @homepage     https://github.com/saccma/twitch-reruns-hide-userscript
 // @author       Dampyr
 //
@@ -21,7 +21,7 @@ eval(GM_getResourceText("waitForKeyElements"));
 waitForKeyElements("article", hideRerunLive, false);
 
 function hideRerunLive(jNode) {
-var title = jNode.querySelector("h3")?.textContent?.toLowerCase();
+  var title = jNode.querySelector("h3")?.textContent?.toLowerCase();
   if (!title) {
     return;
   }
@@ -31,19 +31,21 @@ var title = jNode.querySelector("h3")?.textContent?.toLowerCase();
     hideCard(jNode);
   } else {
   // Mediocre streams, they don't tag it right but at least type it in the title...
-  var badWords = [
-    "re-run",
-    "rebroadcast",
-    "recap",
-    "rerun",
-    "!rr",
-    "rewatch",
-    "𝓡𝓡",
-    "𝙍𝙚𝙧𝙪𝙣",
-    "not live"
-  ];
+    var badWords = [
+      "re-run",
+      "rebroadcast",
+      "recap",
+      "rerun",
+      "!rr",
+      "rewatch",
+      "𝓡𝓡",
+      "𝙍𝙚𝙧𝙪𝙣",
+      "not live"
+    ];
 
-  if (badWords.some(x => title.includes(x))) {
+    if (badWords.some(x => title.includes(x))) {
+      hideCard(jNode);
+    } else if (title.split(' ').some(x => x === 'rr')) {
       hideCard(jNode);
     }
   }
