@@ -25,10 +25,13 @@ function hideRerunLive(jNode) {
   if (!title) {
     return;
   }
+  console.group("TITLE:", title);
   // Good streams, they tag it as a rerun
   var rerunTagEl = jNode.querySelector('[data-a-target="Rerun"]');
   if (rerunTagEl) {
     hideCard(jNode);
+    console.log("RERUN - TAGGED");
+    console.log("jNode", jNode);
   } else {
   // Mediocre streams, they don't tag it right but at least type it in the title...
     var badWords = [
@@ -45,10 +48,15 @@ function hideRerunLive(jNode) {
 
     if (badWords.some(x => title.includes(x))) {
       hideCard(jNode);
+      console.log("RERUN");
+      console.log("jNode", jNode);
     } else if (title.split(' ').some(x => x === 'rr')) {
       hideCard(jNode);
+      console.log("RERUN - just the 'RR' characters");
+      console.log("jNode", jNode);
     }
   }
+  console.groupEnd();
 }
 
 function hideCard(node) {
