@@ -2,7 +2,7 @@
 // @name         Twitch Rerun Transparency
 // @namespace    Violentmonkey Scripts
 //
-// @version      0.3.0
+// @version      0.3.1
 //
 // @description  Make Reruns from twitch cards lists directories transparent (should work for all directories e.g.: /following, /following/live and all categories)
 // @homepage     https://github.com/saccma/twitch-reruns-hide-userscript
