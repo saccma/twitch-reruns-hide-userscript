@@ -14,6 +14,8 @@
 // @resource     waitForKeyElements https://cdn.jsdelivr.net/gh/CoeJoder/waitForKeyElements.js@v1.2/waitForKeyElements.js
 //
 // @comment      Based upon the work of Markus 'Ragowit' Persson, "Twitch Rerun Hider - https://greasyfork.org/it/scripts/40477-twitch-rerun-hider/code".
+// @downloadURL https://update.greasyfork.org/scripts/501378/Twitch%20Rerun%20Transparency.user.js
+// @updateURL https://update.greasyfork.org/scripts/501378/Twitch%20Rerun%20Transparency.meta.js
 // ==/UserScript==
 
 eval(GM_getResourceText("waitForKeyElements"));
@@ -21,7 +23,7 @@ eval(GM_getResourceText("waitForKeyElements"));
 waitForKeyElements("article", hideRerunLive, false);
 
 function hideRerunLive(jNode) {
-  var title = jNode.querySelector("h3")?.textContent?.toLowerCase();
+  var title = jNode.querySelector("h4")?.textContent?.toLowerCase();
   if (!title) {
     return;
   }
